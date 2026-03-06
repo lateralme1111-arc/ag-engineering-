@@ -2,8 +2,12 @@
 @import "tailwindcss";
 
 html {
-  scroll-behavior: smooth;
   overscroll-behavior: none;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 

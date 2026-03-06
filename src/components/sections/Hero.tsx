@@ -9,11 +9,16 @@ export default function Hero() {
       <section className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden pt-32 pb-16">
 
          {/* Interactive 3D Spline Scene (Background / Center) - Lazy loaded */}
-         <div className="absolute inset-0 z-0 h-full w-full pointer-events-auto cursor-move">
+         <div
+            className="absolute inset-0 z-0 h-full w-full pointer-events-none cursor-default"
+            style={{ willChange: 'transform' }}
+         >
             <Suspense fallback={
                <div className="w-full h-full bg-gradient-to-br from-background via-accent-dark to-background animate-pulse" />
             }>
-               <Spline scene="https://prod.spline.design/Zhut-RNTHJoP7UtW/scene.splinecode" />
+               <div className="w-full h-full pointer-events-auto">
+                  <Spline scene="https://prod.spline.design/Zhut-RNTHJoP7UtW/scene.splinecode" />
+               </div>
             </Suspense>
          </div>
 
