@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/sections/Hero';
 import Problem from './components/sections/Problem';
@@ -17,8 +18,32 @@ const CaseStudies = lazy(() => import('./components/sections/CaseStudies'));
 const ApplicationForm = lazy(() => import('./components/sections/ApplicationForm'));
 
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background selection:bg-accent-mint selection:text-background overflow-x-hidden">
+    <div className="min-h-screen bg-background selection:bg-accent-mint selection:text-background">
       {/* Global Background Noise/Texture — GPU-promoted to avoid repaint thrashing */}
       <div
         className="fixed inset-0 pointer-events-none z-50 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"

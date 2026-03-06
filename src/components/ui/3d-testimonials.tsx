@@ -20,7 +20,7 @@ export function Marquee3D({
     pauseOnHover = false,
     children,
     vertical = false,
-    repeat = 4,
+    repeat = 2,
     ariaLabel,
     ariaLive = 'off',
     ariaRole = 'marquee',
